@@ -1,0 +1,49 @@
+.container {
+    margin: auto;
+    width: 50%;
+   padding: 62px;
+
+}
+.main{
+    background-color: rgb(40, 40, 150);
+}
+
+
+.login {
+padding: 50px;
+    border-radius: 15px;
+    background-color: whitesmoke;
+text-align:center;
+
+}
+
+h1 {
+    color: black;
+}
+
+.login input {
+    padding: 10px;
+    width: 250px;
+    margin: 10px 0px;
+    border: none;
+    border-radius: 10px;
+}
+
+button {
+    padding: 8px;
+    margin: 10px 0px;
+    width: 250px;
+    color: white;
+    background-color: rgb(12, 12, 226);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+select{
+    padding: 8px;
+    border-radius: 10px;
+    width: 47%;
+    margin: 10px 0px;
+    border: none;
+}
+
