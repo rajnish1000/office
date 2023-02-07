@@ -1,41 +1,33 @@
 import React from 'react'
-import "./Dashboard.css"
+import "./Sidebar.css"
 import {RiAdminFill} from "react-icons/ri"
 import {IoMdContacts} from "react-icons/io"
 import {RiContactsFill} from "react-icons/ri"
 import {IoIosContact} from "react-icons/io"
 import {AiOutlineLineChart} from "react-icons/ai"
 import {BsTable} from "react-icons/bs"
-import {IoMdNotificationsOutline} from "react-icons/io"
-import {CgMail} from "react-icons/cg"
-import profile from "../Components/Assets/pic.webp"
-import { Link } from 'react-router-dom'
 
-const Dashboard = () => {
+import { Link } from 'react-router-dom'
+import Topbar from './Topbar'
+
+
+const Sidebar = () => {
   return (
     <>
    <div className='office'>
-      <div className='sidebar'>
+      <div className='sidebar tilt-in-top-1'>
         <h2>Office Management</h2>
         <hr/>
-        {/* <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="fas fa-fw fa-table"></i><RiAdminFill/>&nbsp;<span>Admin Dashboard</span></a>
+         <li class="nav-item">
+         <Link to={"/Empdashboard"}>      <a class="nav-link" href="#">
+                <i class="fas fa-fw fa-table"></i><RiAdminFill/>&nbsp;<span>Dashboard</span></a></Link>
         </li>
 
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="fas fa-fw fa-table"></i><IoIosContact/>&nbsp;<span>HR Dashboard</span></a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="fas fa-fw fa-table"></i><RiContactsFill/>&nbsp;<span>Manager Dashboard</span></a>
-        </li> */}
+     
  
         <li class="nav-item">
            <Link to={"/Empdashboard"}> <a class="nav-link" href="_self">
-                <i class="fas fa-fw fa-table"></i><IoMdContacts/>&nbsp;<span>Employee Dashboard</span></a></Link>
+                <i class="fas fa-fw fa-table"></i><IoMdContacts/>&nbsp;<span>Employee</span></a></Link>
         </li>
         <hr/>
 
@@ -63,25 +55,32 @@ const Dashboard = () => {
         <i class="fas fa-fw fa-table"></i><BsTable/>&nbsp;<span>Tables</span></a>
         </li>
       </div>
-      <div className='sidebar2'>
-          <div className='srch'>
-            <input type="search" placeholder='Search'/>
-          </div>
 
-          <div className='icons'>
-          <p><IoMdNotificationsOutline/></p>
-          <p><CgMail/></p>
-          <img src={profile}/>
-          </div>
+      <div className='right'>
+   
+      <Topbar/>
+
+      <div className='cards'>
+      <Link to={"/empdashboard"}>  <h1>Dashboard</h1></Link>
 
       </div>
+
+      <div className='welcome tilt-in-fwd-tr'>
+        <p>WELCOM TO ARIVANI OFFICE MANAGEMENT SYSTEM</p>
+        
+      </div>
+
+      </div> 
+   
+      
    </div>
+  
     
     </>
   )
 }
 
-export default Dashboard
+export default Sidebar
 
 
 

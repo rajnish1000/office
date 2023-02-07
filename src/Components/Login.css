@@ -1,7 +1,8 @@
 .container {
     margin: auto;
     width: 50%;
-   padding: 62px;
+   height: 100vh;
+   padding: 60px;
 
 }
 .main{
@@ -10,11 +11,14 @@
 
 
 .login {
-padding: 50px;
+padding: 60px;
     border-radius: 15px;
     background-color: whitesmoke;
 text-align:center;
 
+}
+.logfb button{
+background-color:red;
 }
 
 h1 {
@@ -29,7 +33,7 @@ h1 {
     border-radius: 10px;
 }
 
-button {
+.login button {
     padding: 8px;
     margin: 10px 0px;
     width: 250px;

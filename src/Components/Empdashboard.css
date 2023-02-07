@@ -1,0 +1,24 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    gap: 3px;
+    background-color: gray;
+    padding: 2px;
+  }
+  
+  .grid-container > div {
+    background-color:whitesmoke;
+    text-align: center;
+    padding: 5px 0;
+    font-size: 20px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+ .addnewbtn{
+  display: flex;
+  justify-content: right;
+  padding: 20px;
+  
+ }
+ /* .container{
+  padding: 20px;
+ } */
