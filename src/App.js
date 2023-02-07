@@ -1,10 +1,10 @@
 
 import './App.css';
-import Dashboard from "./Components/Dashboard"
 import Login from './Components/Login';
 import { Route, Routes } from 'react-router-dom';
 import Empdashboard from './Components/Empdashboard';
-import Blank from './Components/Blank';
+import Sidebar from './Components/Sidebar';
+import Signup from './Components/Signup';
 
 function App() {
   return (
@@ -12,8 +12,9 @@ function App() {
   
     <Routes>
     <Route path={"/"} element={<Login/>}/>
-     <Route path={"/dashboard"} element={<Dashboard/>}/>
+     <Route path={"/Sidebar"} element={<Sidebar/>}/>
       <Route path={"/empdashboard"} element={<Empdashboard/>}/>
+      <Route path={"/signup"} element={<Signup/>}/>
     </Routes>
     {/* <Blank/> */}
     </>

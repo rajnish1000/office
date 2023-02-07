@@ -1,43 +1,45 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import axios from 'axios';
+import Dashboard from './Sidebar';
+import Topbar from './Topbar';
+import Sidebar from './Sidebar';
+import Button from './Button';
+import { Link } from 'react-router-dom';
+import "../Components/Empdashboard.css"
+
 
 const Empdashboard = () => {
 
 
-    const [myData, setMyData] = useState([]);
-
-
-
-    useEffect(() => {
-        axios
-            .get("http://localhost:8090/employee")
-            .then( )
-            .catch( )
-    }, []);
 
 
 
 
     return (
         <>
-        
 
-            <div className="grid">
-                {myData.map((post) => {
-                    const { id, fname, lname , email, role, status } = post;
-                    return (
-                        <div key={id} className="card">
-                            <h2>{id}</h2>
-                            <h2>{fname}</h2>
-                            <h2>{lname}</h2>
-                            <h2>{email}</h2>
-                            <h2>{role}</h2>
-                            <h2>{status}}</h2>
-              
-                        </div>
-                    );
-                })}
+
+            <Topbar />
+            <div className='addnewbtn'>
+                <div>
+                    <Link to={"/signup"}><Button tittle="Add New" /></Link>
+                </div>           
+             </div>
+          {/* <div className="demo">
+          <div className="grid-container">
+                <div>1</div>
+                <div><button>view profile</button></div>
+                <div>Rajnish Sharma</div>
+                <div>raj@gmail.com</div>
+                <div>Active</div>
+                <div >Employee</div>
+           
+           
+
             </div>
+          </div> */}
+
+
 
         </>
 
