@@ -9,16 +9,16 @@ import Signup from './Components/Signup';
 function App() {
   return (
     <>
-  
-    <Routes>
-    <Route path={"/"} element={<Login/>}/>
-     <Route path={"/Sidebar"} element={<Sidebar/>}/>
-      <Route path={"/empdashboard"} element={<Empdashboard/>}/>
-      <Route path={"/signup"} element={<Signup/>}/>
-    </Routes>
-    {/* <Blank/> */}
+
+      <Routes>
+        <Route path={"/"} element={<Login />} />
+        <Route path={"/Sidebar"} element={<Sidebar />} />
+        <Route path={"/empdashboard"} element={<Empdashboard />} />
+        <Route path={"/signup"} element={<Signup />} />
+      </Routes>
+
     </>
-    
+
   );
 }
 

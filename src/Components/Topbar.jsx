@@ -13,7 +13,7 @@ const Topbar = () => {
             <div className='right'>
                 <div className='sidebar2'>
                     <div className='srch'>
-                        <input type="search" placeholder='Search' />
+                        <input type="search" placeholder='Search Employee' />
                     </div>
 
                     <div className='icons'>
