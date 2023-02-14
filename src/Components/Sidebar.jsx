@@ -2,13 +2,11 @@ import React from 'react'
 import "./Sidebar.css"
 import {RiAdminFill} from "react-icons/ri"
 import {IoMdContacts} from "react-icons/io"
-import {RiContactsFill} from "react-icons/ri"
-import {IoIosContact} from "react-icons/io"
 import {AiOutlineLineChart} from "react-icons/ai"
 import {BsTable} from "react-icons/bs"
-
 import { Link } from 'react-router-dom'
 import Topbar from './Topbar'
+
 
 
 const Sidebar = () => {
@@ -69,8 +67,10 @@ const Sidebar = () => {
         <p>WELCOM TO ARIVANI OFFICE MANAGEMENT SYSTEM</p>
         
       </div>
+      
 
       </div> 
+      
    
       
    </div>

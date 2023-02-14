@@ -2,15 +2,23 @@ const connection = require('./connect');
 const express = require('express');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt');
 var cors = require('cors');
 const app = express();
-const secretkey = "secretkey"
 
+const secretkey = 'secretkey';
 app.use(bodyParser.json());
-bodyParser.urlencoded({ extended: true });
+// bodyParser.urlencoded({ extended: true });
+
+app.use(cors({
+    origin: ['http://localhost:3000/', 'http://localhost:3000', "*"]
+}));
+
+// app.use(express.json());
 
 
-app.use(cors());
+
+
 
 app.post("/employees", (req, res) => {
     // console.log(req.body);
@@ -43,7 +51,8 @@ app.post("/login", (req, res) => {
     var email = req.body.email;
     var password = req.body.password;
 
-    var sql = "INSERT INTO `login`( `email`, `password`) VALUES ( '" + email + "' ,'" + password + "'  )"
+    var sql = "INSERT INTO `login`( `email`, `password`) VALUES ( '" + email + "' , '" + password + "'  )"
+    // var sql = "SELECT * FROM login WHERE  email ='" + email + "'";
     connection.query(sql, (err, result) => {
         if (err) {
             console.log(err);
@@ -54,22 +63,33 @@ app.post("/login", (req, res) => {
 
     const user = {
 
-        email: "raj@gmail.com",
-        password: "Test123"
+        email: "email",
+        password: "password"
     }
-    jwt.sign({ user }, secretkey, (err, token) => {
-        res.json({
-            token
-        })// { expiresIn: '300s' },
-    })
+    const token = jwt.sign({ user }, secretkey, { expiresIn: '1h' })
+    res.json({
+        token
+    });
+
 
 })
 
+app.get("/login", (req, res) => {
+    console.log("req", req.body);
+    connection.query(`SELECT * FROM login WHERE id=5`, (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send(result);
+        }
+    });
+});
+// ${req.body.id}
 
-app.post("/signup" , (req, res) =>{
-  
+app.post("/signup", (req, res) => {
+
     var id = req.body.id;
-   var first_name = req.body.first_name;
+    var first_name = req.body.first_name;
     var last_name = req.body.last_name;
     var email = req.body.email;
     var mobile = req.body.mobile;
@@ -82,33 +102,63 @@ app.post("/signup" , (req, res) =>{
     var password = req.body.password;
     var confirm_password = req.body.confirm_password;
 
-  if (password !== confirm_password) {
-    res.json({ message: 'password not match' });
-  }else
-    var sql = "INSERT INTO `signup`(`id`,`first_name`, `last_name`, `email`, `mobile`, `gender`, `date_of_birth`, `user_type`, `address`,`status`, `date` , `password`, `confirm_password`) VALUES ('" + id + "','" + first_name + "' , '" + last_name + "' , '" + email + "' ,'" + mobile + "' ,'" + gender + "' , '" + date_of_birth + "' , '" + user_type + "' ,'" + address + "' , '" + status + "', '" + date + "' , '" + password + "' , '" + confirm_password + "' )"
+    if (password !== confirm_password) {
+        res.json({ message: 'password not match' });
+    } else
+        var sql = "INSERT INTO `signup`(`id`,`first_name`, `last_name`, `email`, `mobile`, `gender`, `date_of_birth`, `user_type`, `address`,`status`, `date` , `password`, `confirm_password`) VALUES ('" + id + "','" + first_name + "' , '" + last_name + "' , '" + email + "' ,'" + mobile + "' ,'" + gender + "' , '" + date_of_birth + "' , '" + user_type + "' ,'" + address + "' , '" + status + "', '" + date + "' , '" + password + "' , '" + confirm_password + "' )"
 
-    connection.query(sql, (err, result) => {
-        if (err) {
-            console.log(err);
-        } else {
-            res.json({ message: 'User registered successfully.' });
-            res.send(result)
-        }
+        if (password !== confirm_password) {
+            res.json({
+                message: "password not match",
+            })}else {
+
+                connection.query(sql, (err, result) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        res.json({ message: 'User registered successfully.' });
+                        res.send(result)
+                    }
+                });
+
+            }
+
+ 
+
+  
+        // }else{
+        //     let user = new user (req.body);
+        //     let result = user.save();
+        //     res.send(submit);
+        // }
+
+    })
+
+app.get("/signup", (req, res) => {
+        // console.log("qqq");
+        var data = "SELECT * FROM signup"
+        connection.query(data, (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(result);
+            }
+        });
     });
 
-// if(password !== confirm_password){
-//   res.json({
-//     message:"password not match",
-// })
-// }else{
-//     let user = new user (req.body);
-//     let result = user.save();
-//     res.send(submit);
-// }
-    
-})
+    app.delete("/signup", (req, res) => {
+        console.log("req", req.body);
+        connection.query(`DELETE FROM signup WHERE id=${req.body.id}`, (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(result);
+            }
+        })
+    });
 
-app.listen(8090, () => {
+
+app.listen(5000, () => {
     console.log("Running now");
 })
 

@@ -5,6 +5,9 @@
    padding: 60px;
 
 }
+.login:hover{
+  box-shadow: 5px 5px 10px 10px whitesmoke;
+}
 .main{
     background-color: rgb(40, 40, 150);
 }

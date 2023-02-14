@@ -15,11 +15,28 @@
   }
  .addnewbtn{
   display: flex;
-  justify-content: right;
-  padding: 20px;
+  justify-content: space-between;
+   padding: 0px 50px; 
   
  }
  .empdash{
   background-color: whitesmoke;
   border-radius: 10px;
  }
+ .table{
+  border: 1px solid black;
+  border-collapse: collapse;
+  
+ }
+ td{
+  text-align: center;
+
+
+ }
+ th{
+  text-align: center;
+
+ }
+td button:hover{
+  transform: scale(1.2);
+}

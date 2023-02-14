@@ -13,10 +13,11 @@ const Login = () => {
 
     }
     const navegate = useNavigate()
-    // const token = localStorage.getItem(token);
+    const token = localStorage.getItem("token");
     const [value, setValue] = useState(initial);
-    const [email, setEmail] = useState()
-    const [password, setPassword] = useState()
+    const [user, setUser] = useState()
+
+
     const handleInput = (event) => {
 
         const name = event.target.name;
@@ -29,31 +30,22 @@ const Login = () => {
         event.preventDefault();
         console.log(value);
 
-        axios.post("http://localhost:8090/login", {
-            email: email,
-            password: password
-        }).then((response) => {
-            console.log(response.data)
-            // localStorage.setItem("token", response.data.accessToken);
-            // localStorage.setItem("user", JSON.stringify(response.data.user))
-
-
-        }).catch((err) => {
-            console.log(err)
-
-
-        })
-        alert("successfully login")
+        event.preventDefault();
+        axios.post("http://localhost:5000/login", { email: value.email, password: value.password })
+            .then(res => {
+                localStorage.setItem("token", res.data.token);
+                localStorage.setItem("user", JSON.stringify(res.data.user))
+            })
+         alert("successfully submit")
         navegate("/sidebar")
 
-
-
     }
-//  useEffect(() => {
-//      if (token) {
-//          navegate("/sidebar")
-//      }
-// }, [])
+
+    useEffect(() => {
+        if (token) {
+        //   navegate("/sidebar")
+        }
+    }, [])
 
     return (
         <>
@@ -62,8 +54,8 @@ const Login = () => {
 
                     <div className='login'>
                         <h1>ARIVANI ADMIN PANEL</h1>
-                        <input type="text" name="email" placeholder='enter your name' onChange={handleInput} /> <br />
-                        <input type="password" name="password" placeholder='enter your password' onChange={handleInput} /> <br />
+                        <input type="text" name="email" placeholder='enter your name' onChange={handleInput} required /> <br />
+                        <input type="password" name="password" placeholder='enter your password' onChange={handleInput} required /> <br />
 
                         <button onClick={handleSubmit}>Log in</button><br />
                         <hr />
@@ -76,11 +68,12 @@ const Login = () => {
                 </div>
             </div>
         </>
-        // gigjsegijhaoi
+
     )
 }
 
 export default Login;
+
 
 
 
