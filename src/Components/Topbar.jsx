@@ -4,7 +4,12 @@ import { CgMail } from "react-icons/cg"
 import profile from "./Assets/pic.webp"
 import axios from 'axios'
 import "./Topbar.css"
-
+import { RiLogoutBoxRLine } from "react-icons/ri"
+import { AiFillSetting } from "react-icons/ai"
+import { MdPrivacyTip } from "react-icons/md"
+import { CgProfile } from "react-icons/cg"
+import { RiInboxArchiveFill } from "react-icons/ri"
+import { MdDarkMode } from "react-icons/md"
 
 
 
@@ -53,13 +58,13 @@ const Topbar = () => {
 
                             <img className="btn dropdown-toggle" data-bs-toggle="dropdown" src={profile} />
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Inbox</a></li>
-                                <li><a class="dropdown-item" href="#">Profile</a></li>
-                                <li><a class="dropdown-item" href="#">Privacy</a></li>
-                                <li><a class="dropdown-item" href="#">Themes</a></li>
-                                <li><a class="dropdown-item" href="#">Setting</a></li>
+                                <li><a class="dropdown-item" href="#"><RiInboxArchiveFill />&nbsp;&nbsp;Inbox</a></li>
+                                <li><a class="dropdown-item" href="http://localhost:3000/Profile"><CgProfile />&nbsp;&nbsp;Profile</a></li>
+                                <li><a class="dropdown-item" href="#"><MdPrivacyTip />&nbsp;&nbsp;Privacy</a></li>
+                                <li><a class="dropdown-item" href="#"><MdDarkMode />&nbsp;&nbsp;Themes</a></li>
+                                <li><a class="dropdown-item" href="#"><AiFillSetting />&nbsp;&nbsp;Setting</a></li>
                                 <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="#">Log out</a></li>
+                                <li><a class="dropdown-item" href="http://localhost:3000"><RiLogoutBoxRLine />&nbsp;&nbsp;Log out</a></li>
                             </ul>
                         </div>
 

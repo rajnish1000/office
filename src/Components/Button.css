@@ -10,5 +10,6 @@ button{
 }
 button:hover{
     background-color: red;
+    transform: scale(1.1);
     
 }

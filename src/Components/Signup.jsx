@@ -57,10 +57,14 @@ const Signup = () => {
     console.log(result);
 
 
-    // alert("succsessfully  submit")
+    // alert("succsessfully  submit")3210
     navegate("/empdashboard")
   }
-  
+
+
+
+
+
 
 
 
@@ -68,9 +72,9 @@ const Signup = () => {
     <>
       <Topbar />
       <div className='signup'>
-      <div >
-            <Link to={"/empdashboard"}><Button tittle="Back" /></Link>
-          </div>
+        <div >
+          <Link to={"/empdashboard"}><Button tittle="Back" /></Link>
+        </div>
 
         <div className='container'>
 
@@ -123,7 +127,8 @@ const Signup = () => {
               </div>
             </div>
             <div class="col-12 text-align-center">
-              <button type="submit" class="btn btn-dark" onClick={handleSubmit}>Submit</button>
+              <button type="submit" class="btn btn-dark" onClick={handleSubmit}>Submit</button>&nbsp;
+              <button type="submit" class="btn btn-dark" >Update</button>
             </div>
           </form>
 

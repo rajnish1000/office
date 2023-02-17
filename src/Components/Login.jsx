@@ -29,23 +29,14 @@ const Login = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(value);
-
-        event.preventDefault();
         axios.post("http://localhost:5000/login", { email: value.email, password: value.password })
             .then(res => {
-                localStorage.setItem("token", res.data.token);
-                localStorage.setItem("user", JSON.stringify(res.data.user))
-            })
-         alert("successfully submit")
-        navegate("/sidebar")
-
+                localStorage.setItem("token", res.data.accessToken);
+                // localStorage.setItem("user", JSON.stringify(res.data.user))
+                navegate("/sidebar")
+            });
     }
 
-    useEffect(() => {
-        if (token) {
-        //   navegate("/sidebar")
-        }
-    }, [])
 
     return (
         <>
@@ -68,6 +59,9 @@ const Login = () => {
                 </div>
             </div>
         </>
+
+
+
 
     )
 }
