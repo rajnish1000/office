@@ -27,9 +27,7 @@ const Topbar = () => {
             });
     }, []);
 
-
-
-
+  
 
     return (
         <>
@@ -39,43 +37,39 @@ const Topbar = () => {
                     <div className='srch'>
                         <input type="search" placeholder='Search Employee' />
                     </div>
+                    <div>
+                        <marquee direction="down" height="60vh" style={{color:"navyblue"}}>A r i v a n i   T e c h n o l o g i e s  </marquee>
+                    </div>
 
                     <div className='icons'>
                         <p><IoMdNotificationsOutline /></p>
                         <p><CgMail /></p>
 
-
-                        {
-                            email?.map((data) => (
-                                <div >
-                                    <p>{data.email}</p>
-                                </div>
-                            ))
-                        }
-
-
-                        <div class="btn-group">
-
+                        <div className="btn-group">
                             <img className="btn dropdown-toggle" data-bs-toggle="dropdown" src={profile} />
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#"><RiInboxArchiveFill />&nbsp;&nbsp;Inbox</a></li>
-                                <li><a class="dropdown-item" href="http://localhost:3000/Profile"><CgProfile />&nbsp;&nbsp;Profile</a></li>
-                                <li><a class="dropdown-item" href="#"><MdPrivacyTip />&nbsp;&nbsp;Privacy</a></li>
-                                <li><a class="dropdown-item" href="#"><MdDarkMode />&nbsp;&nbsp;Themes</a></li>
-                                <li><a class="dropdown-item" href="#"><AiFillSetting />&nbsp;&nbsp;Setting</a></li>
-                                <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="http://localhost:3000"><RiLogoutBoxRLine />&nbsp;&nbsp;Log out</a></li>
+                            <ul className="dropdown-menu">
+                                <li><a className="dropdown-item" href="#"><RiInboxArchiveFill />&nbsp;&nbsp;Inbox</a></li>
+                                <li><a className="dropdown-item" href="http://localhost:3000/Profile"><CgProfile />&nbsp;&nbsp;Profile</a></li>
+                                <li><a className="dropdown-item" href="#"><MdPrivacyTip />&nbsp;&nbsp;Privacy</a></li>
+                                <li><a className="dropdown-item" href="#"><MdDarkMode />&nbsp;&nbsp;Theme</a></li>
+                                <li><a className="dropdown-item" href="#"><AiFillSetting />&nbsp;&nbsp;Setting</a></li>
+                                <li><hr className="dropdown-divider" /></li>
+                                <li><a className="dropdown-item" href="http://localhost:3000"><RiLogoutBoxRLine />&nbsp;&nbsp;Log out</a></li>
                             </ul>
                         </div>
-
                     </div>
                 </div>
 
             </div>
-
-
         </>
     )
 }
 
 export default Topbar
+
+
+
+
+
+
+
