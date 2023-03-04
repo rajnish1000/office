@@ -39,6 +39,7 @@ const Empdashboard = () => {
   });
 
   const deleteData = async (id) => {
+    alert("Are you want to delete")
     await fetch("http://localhost:5000/signup", {
       method: "delete",
       body: JSON.stringify({ 'id': id }),
@@ -55,7 +56,7 @@ const Empdashboard = () => {
 
   const handleUpdate = async () => {
     alert("Do you really want to update ?")
-    navegate("/editdata");
+    // navegate("/editdata");
 
   }
 
@@ -84,7 +85,7 @@ const Empdashboard = () => {
                   <tr className="col-sm-12" style={{ background: "black", color: "white" }}>
                     <th>Id</th>
                     <th>Action</th>
-                    <th>Status</th>
+                    {/* <th>Status</th> */}
                     <th>Name</th>
                     <th>Email</th>
                     <th>Contact</th>
@@ -96,10 +97,10 @@ const Empdashboard = () => {
                 <tbody>
                   {
                     data?.map((data, index) => (
-                      <tr key={index}>
+                      <tr key={index }>
                         <td><b>{data.id}</b></td>
-                        <td> <Link to={"/Profile"}><Button tittle="View Profile" /></Link></td>
-                        <td>{data.status}</td>
+                        <td> <Link to={"/Profile/" +data.id}><Button tittle="View Profile" /></Link></td>
+                        {/* <td>{data.status}</td> */}
                         <td><b>{data.first_name}&nbsp;{data.last_name}</b></td>
                         <td><b>{data.email}</b></td>
                         <td><b>{data.mobile}</b></td>
@@ -123,7 +124,6 @@ const Empdashboard = () => {
 }
 
 export default Empdashboard;
-
 
 
 

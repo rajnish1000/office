@@ -1,70 +1,56 @@
 import React, { useEffect, useState } from 'react'
 import Topbar from "./Topbar"
 import Button from "./Button"
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import axios from 'axios'
+import './Profile.css'
 
 const Profile = () => {
+
+    let { id } = useParams();
     const [data, setData] = useState();
 
-    useEffect(() => {
-        axios.get('http://localhost:5000/signupp/:id')
+    const profile = async (data) => {
+        await axios.get(`http://localhost:5000/signup/${id}`, data)
             .then(response => {
+                console.log(response);
                 setData(response.data);
             })
             .catch(error => {
                 console.log(error);
             });
-    });
+    }
 
+    useEffect(() => {
+        profile()
+    }, [])
 
     return (
         <>
             <Topbar />
             <div className='p-3'>
-                <Link to={"/empdashboard"}><Button tittle="Back" /></Link>
+               
+            </div >
+            <div className='text-center'>
+                <h1>WELCOME TO MY PROFILE</h1>
             </div>
-            <div>
-                <form className='containerr p-5  '>
-                    <table className='table'>
-                        <thead>
-                            <tr className="col-sm-12">
-                                <th>Id</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Mobile</th>
-                                <th>Gender</th>
-                                <th>Date of Birth</th>
-                                <th>User Type</th>
-                                <th>Address</th>
-                                <th>Status</th>
-                                <th>Joining Date</th>
+            <div className='container-pro p-5' >
 
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            {
-                                data?.map((data, index) => (
-                                    <tr key={index}>
-                                        <td>{data.id}</td>
-                                        <td>{data.first_name}&nbsp;{data.last_name}</td>
-                                        <td>{data.email}</td>
-                                        <td>{data.mobile}</td>
-                                        <td>{data.gender}</td>
-                                        <td>{data.date_of_birth}</td>
-                                        <td>{data.user_type}</td>
-                                        <td>{data.address}</td>
-                                        <td>{data.status}</td>
-                                        <td>{data.date}</td>
-
-                                    </tr>
-                                ))
-                            }
-                        </tbody>
-                    </table>
-                </form>
-
+                {
+                    data?.map((data, index) => (
+                        <div key={index}>
+                            {/* <img src="rsg.jpg" alt='pic'/> */}
+                            <p>Employee Id :  <b>{data.id}</b></p>
+                            <p>Name : <b>{data.first_name}&nbsp;{data.last_name}</b></p>
+                            <p>Email : <b>{data.email}</b></p>
+                            <p>Contact No. : <b>{data.mobile}</b></p>
+                            <p>Date of Birth : <b>{data.date_of_birth}</b></p>
+                            <p>Address : <b>{data.address}</b></p>
+                            <p>Status : <b>{data.status}</b></p>
+                            <Link to={"/empdashboard"}><Button tittle="Go Back" /></Link>
+                        </div>
+                    ))
+                }
             </div>
         </>
     )

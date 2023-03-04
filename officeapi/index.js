@@ -54,8 +54,8 @@ app.post("/login", (req, res) => {
 
     const user = {
 
-        email: "admin@gmail.com",
-        password: "admin12345"
+        // email: "admin@gmail.com",
+        // password: "admin12345"
     }
 
 
@@ -91,7 +91,6 @@ app.post("/signup", (req, res) => {
     var user_type = req.body.user_type;
     var address = req.body.address
     var status = req.body.status;
-    var date = req.body.date;
     var password = req.body.password;
     var confirm_password = req.body.confirm_password;
 
@@ -99,13 +98,9 @@ app.post("/signup", (req, res) => {
     var password = bcrypt.hashSync(password, saltRounds);
 
 
-    var sql = "INSERT INTO `signup`(`id`,`first_name`, `last_name`, `email`, `mobile`, `gender`, `date_of_birth`, `user_type`, `address`,`status`, `date` , `password`, `confirm_password`) VALUES ('" + id + "','" + first_name + "' , '" + last_name + "' , '" + email + "' ,'" + mobile + "' ,'" + gender + "' , '" + date_of_birth + "' , '" + user_type + "' ,'" + address + "' , '" + status + "', '" + date + "' , '" + password + "' ,  '" + confirm_password + "')"
+    var sql = "INSERT INTO `signup`(`id`,`first_name`, `last_name`, `email`, `mobile`, `gender`, `date_of_birth`, `user_type`, `address`,`status`,  `password`, `confirm_password`) VALUES ('" + id + "','" + first_name + "' , '" + last_name + "' , '" + email + "' ,'" + mobile + "' ,'" + gender + "' , '" + date_of_birth + "' , '" + user_type + "' ,'" + address + "' , '" + status + "' , '" + password + "' ,  '" + confirm_password + "')"
 
-    // if (password !== confirm_password) {
-    //     res.json({
-    //         message: "password not match",
-    //     })
-    // } else {
+  
     connection.query(sql, (err, result) => {
         if (err) {
             console.log(err);
@@ -119,7 +114,7 @@ app.post("/signup", (req, res) => {
 
 app.get("/signup", (req, res) => {
     // console.log("qqq");
-    var data = "SELECT * FROM signup  "
+    var data = "SELECT * FROM signup"
     connection.query(data, (err, result) => {
         if (err) {
             console.log(err);
@@ -132,16 +127,16 @@ app.get("/signup", (req, res) => {
 app.put("/signup/:id", (req, res) => {
     console.log("req", req.body);
     const { id } = req.params;
-    const { first_name, last_name, email, mobile, gender, date_of_birth, user_type, address, status, date, password, confirm_password } = req.body;
+    const { first_name, last_name, email, mobile, gender, date_of_birth, user_type, address, status,  password, confirm_password } = req.body;
 
 
-    const sql = "UPDATE signup SET  first_name=?, last_name=?, email=?,mobile=?,gender=?,date_of_birth=?,user_type=?,address=?,status=?,date=?,password=?,confirm_password=? where id=?"
+    const sql = "UPDATE signup SET  first_name=?, last_name=?, email=?,mobile=?,gender=?,date_of_birth=?,user_type=?,address=?,status=?,password=?,confirm_password=? WHERE id=?"
 
-    connection.query(sql, [first_name, last_name, email, mobile, gender, date_of_birth, user_type, address, status, date, password, confirm_password, id], (err, result) => {
+    connection.query(sql, [first_name, last_name, email, mobile, gender, date_of_birth, user_type, address, status,  password, confirm_password, id], (err, result) => {
         if (err) {
             console.log(err);
         } else {
-            res.send(result);
+            res.send(result)
         }
     })
 });
@@ -184,5 +179,3 @@ app.listen(5000, () => {
 
 
 
-// origin: ['http://localhost:3000/', 'http://localhost:3000', "*"]
-// first_name=?, last_name=?, email=?,mobile=?,gender=?,date_of_birth=?,user_type=?,address=?,status=?,date=?,password=?,confirm_password=? FROM signup?

@@ -4,95 +4,95 @@ import axios from 'axios'
 import Button from './Button'
 import Topbar from './Topbar'
 
+const initial = {
+
+  first_name: "",
+  last_name: "",
+  email: "",
+  mobile: "",
+  gender: "",
+  date_of_birth: "",
+  user_type: "",
+  address: "",
+  status: "",
+  password: "",
+  confirm_password: ""
+
+}
+
 
 
 const Editdata = () => {
 
-  const initial = {
 
-    "first_name": "",
-    "last_name": "",
-    "email": "",
-    "mobile": "",
-    "gender": "",
-    "date_of_birth": "",
-    "user_type": "",
-    "address": "",
-    "status": "",
-    "date": "",
-    "password": "",
-    "confirm_password": ""
-
-  }
 
   let { id } = useParams();
 
-  const [state, setState] = useState(initial)
-  const { first_name, last_name, email, mobile, gender, date_of_birth, user_type, address, status, date, password, confirm_password } = state;
 
-  //  const [formvalue, setValue] = useState()
+  const [state, setState] = useState({
+    // first_name: "",
+    // last_name: "",
+    // email: "",
+    // mobile: "",
+    // gender: "",
+    // date_of_birth: "",
+    // user_type: "",
+    // address: "",
+    // status: "",
+    // password: "",
+    // confirm_password: ""
+  })
+  const { first_name, last_name, email, mobile, gender, date_of_birth, user_type, address, status, password, confirm_password } = state;
+
+  const [formvalue, setValue] = useState(initial)
   const [data, setData] = useState();
   const navegate = useNavigate()
 
 
   const handleInput = (event) => {
-
     const name = event.target.name;
-    const value = event.target.value;
-    setState(({ ...state, [name]: value }))
+    const values = event.target.value;
+    setValue(formvalue => ({ ...formvalue, [name]: values }))
+
   }
 
 
-  const updateList = async () => {
-    await axios.get(`http://localhost:5000/signup/${id}`)
+
+  const updateList = async (data) => {
+    await axios.get(`http://localhost:5000/signup/${id}`, data)
       .then(response => {
+        console.log(response);
         setData(response.data);
-        // console.log(data);
+
       })
-    // console.log(data)
-    //   .catch(error => {
-    //     console.log(error);
-    //   });
+
+      .catch(error => {
+        console.log(error);
+      });
   }
+
   useEffect(() => {
     updateList()
   }, [])
 
-  const handleSubmit = async (event) => {
-    // console.log(formvalue);
-    event.preventDefault();
 
-    await axios.put(`http://localhost:5000/signup/${id}`, {
-      first_name,
-      last_name,
-      email,
-      mobile,
-      gender,
-      date_of_birth,
-      user_type,
-      address,
-      status,
-      date,
-      password,
-      confirm_password
+  const handleSubmit = async (event) => {
+    await fetch(`http://localhost:5000/signup/${id}`, {
+      method: "put",
+      body: JSON.stringify(),
+      headers: { "Content-Type": "Application/JSON" }
     })
-      .then(() => {
-        setState({
-          first_name: "",
-          last_name: "",
-          email: "",
-          mobile: "",
-          gender: "",
-          date_of_birth: "",
-          user_type: "",
-          address: "",
-          status: "",
-          date: "",
-          password: "",
-          confirm_password: ""
-        })
-      })
+       .then(response => response.json())
+      .then((response)=>updateList(response.data))
+      // .catch(error => event.preventDefault());
+    // console.log(result);
+    navegate('/empdashboard');
   }
+
+
+
+
+
 
   return (
 
@@ -104,61 +104,56 @@ const Editdata = () => {
         </div>
 
         <div className='container'>
-          {
-            data?.map((data) => (
+          {data?.map((data, index) => (
 
-              <form class="row g-3" >
+            <form className="row g-3" key={index} >
 
+              <div className="col-md-6">
+                <input type="text" className="form-control" name="first_name" defaultValue={data.first_name} value={first_name} placeholder='First Name' onChange={handleInput} />
+              </div>
+              <div className="col-md-6">
+                <input type="text" className="form-control" name="last_name" defaultValue={data.last_name} value={last_name} placeholder='Last Name' onChange={handleInput} />
+              </div>
+              <div className="col-md-6">
+                <input type="email" className="form-control" name="email" defaultValue={data.email} value={email} placeholder='Enter your email' onChange={handleInput} />
+              </div>
+              <div className="col-md-6">
+                <input type="password" className="form-control" name="password" defaultValue={data.password} value={password} placeholder='password' onChange={handleInput} />
+              </div>
+              <div className="col-md-6">
+                <input type="password" className="form-control" name="confirm_password" defaultValue={data.confirm_password} value={confirm_password} placeholder='confirm password' onChange={handleInput} />
+              </div>
+              <div className="col-md-6">
+                <input type="text" className="form-control" name="mobile" defaultValue={data.mobile} value={mobile} placeholder='Mobile' onChange={handleInput} />
+              </div>
+              <div className="col-md-6">
+                <input type="text" className="form-control" name="gender" defaultValue={data.gender} value={gender} placeholder='Gender' onChange={handleInput} />
+              </div>
+              <div className="col-md-6">
+                <input type="date" className="form-control" name="date_of_birth" defaultValue={data.date_of_birth} value={date_of_birth} placeholder='Date of birth' onChange={handleInput} />
+              </div>
+              <div className="col-md-6">
+                <input type="number" className="form-control" name="user_type" defaultValue={data.user_type} value={user_type} placeholder='User Type' onChange={handleInput} />
+              </div>
+              <div className="col-12">
+                <input type="text" className="form-control" name="address" defaultValue={data.address} value={address} placeholder="address" onChange={handleInput} />
+              </div>
+              <div className="col-md-6">
+                <input type="number" className="form-control" name="status" defaultValue={data.status} value={status} placeholder='status' onChange={handleInput} />
+              </div>
 
-                <div class="col-md-6">
-                  <input type="text" class="form-control" name="first_name" value={data.first_name} placeholder='First Name' onChange={handleInput} />
-                </div>
-                <div class="col-md-6">
-                  <input type="text" class="form-control" name="last_name" value={data.last_name} placeholder='Last Name' onChange={handleInput} />
-                </div>
-                <div class="col-md-6">
-                  <input type="email" class="form-control" name="email" value={data.email} placeholder='Enter your email' onChange={handleInput} />
-                </div>
-                <div class="col-md-6">
-                  <input type="password" class="form-control" name="password" value={data.password} placeholder='password' onChange={handleInput} />
-                </div>
-                <div class="col-md-6">
-                  <input type="password" class="form-control" name="confirm_password" value={data.confirm_password} placeholder='confirm password' onChange={handleInput} />
-                </div>
-                <div class="col-md-6">
-                  <input type="text" class="form-control" name="mobile" value={data.mobile} placeholder='Mobile' onChange={handleInput} />
-                </div>
-                <div class="col-md-6">
-                  <input type="text" class="form-control" name="gender" value={data.gender} placeholder='Gender' onChange={handleInput} />
-                </div>
-                <div class="col-md-6">
-                  <input type="date" class="form-control" name="date_of_birth" value={data.date_of_birth} placeholder='Date of birth' onChange={handleInput} />
-                </div>
-                <div class="col-md-6">
-                  <input type="number" class="form-control" name="user_type" value={data.user_type} placeholder='User Type' onChange={handleInput} />
-                </div>
-                <div class="col-12">
-                  <input type="text" class="form-control" name="address" value={data.address} placeholder="address" onChange={handleInput} />
-                </div>
-                <div class="col-md-6">
-                  <input type="number" class="form-control" name="status" value={data.status} placeholder='status' onChange={handleInput} />
-                </div>
-                <div class="col-md-6">
-                  <input type="time" class="form-control" name="date" value={data.date} placeholder='date' onChange={handleInput} />
-                </div>
-                <div class="col-12 text-align-center">
-                  <button type="submit" class="btn btn-dark" onClick={handleSubmit}>Save Update</button>
-                </div>
-              </form>
-            ))
-          }
+              <div className="col-12 text-align-center">
+                <button type="submit" className="btn btn-dark" onClick={handleSubmit}>Save Update</button>
+              </div>
+            </form>
+          ))}
         </div>
       </div>
     </>
   )
 }
 
-export default Editdata
+export default Editdata;
 
 
 
@@ -187,3 +182,5 @@ export default Editdata
 //   alert("submit successfully"))
 // setData(result);
 // navegate("/empdashboard")
+
+

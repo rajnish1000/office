@@ -17,7 +17,7 @@ function App() {
         <Route path={"/Sidebar"} element={<Sidebar />} />
         <Route path={"/empdashboard"} element={<Empdashboard />} />
         <Route path={"/signup"} element={<Signup />} />
-        <Route path={"/Profile"} element={<Profile/>} />
+        <Route path={"/Profile/:id"} element={<Profile/>} />
         <Route path={"/editdata/:id"} element={<Editdata/>} />
       </Routes>
 
