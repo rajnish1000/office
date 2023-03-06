@@ -82,9 +82,9 @@ const Editdata = () => {
       body: JSON.stringify(),
       headers: { "Content-Type": "Application/JSON" }
     })
-       .then(response => response.json())
-      .then((response)=>updateList(response.data))
-      // .catch(error => event.preventDefault());
+      .then(response => response.json())
+      // .then((response) => updateList(response.data))
+    // .catch(error => event.preventDefault());
     // console.log(result);
     navegate('/empdashboard');
   }

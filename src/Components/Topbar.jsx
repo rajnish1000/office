@@ -10,10 +10,13 @@ import { MdPrivacyTip } from "react-icons/md"
 import { CgProfile } from "react-icons/cg"
 import { RiInboxArchiveFill } from "react-icons/ri"
 import { MdDarkMode } from "react-icons/md"
+import { Navigate, useNavigate } from 'react-router-dom'
 
 
 
 const Topbar = () => {
+
+    const Navigate = useNavigate();
 
     const [email, setEmail] = useState(null);
 
@@ -26,6 +29,12 @@ const Topbar = () => {
                 console.log(error);
             });
     }, []);
+
+     const handlelogout = ()=>{
+        localStorage.clear();
+        Navigate("/login")
+     }
+
 
   
 
@@ -54,7 +63,7 @@ const Topbar = () => {
                                 <li><a className="dropdown-item" href="#"><MdDarkMode />&nbsp;&nbsp;Theme</a></li>
                                 <li><a className="dropdown-item" href="#"><AiFillSetting />&nbsp;&nbsp;Setting</a></li>
                                 <li><hr className="dropdown-divider" /></li>
-                                <li><a className="dropdown-item" href="http://localhost:3000"><RiLogoutBoxRLine />&nbsp;&nbsp;Log out</a></li>
+                                <li><a className="dropdown-item" href="http://localhost:3000" onClick={handlelogout}><RiLogoutBoxRLine />&nbsp;&nbsp;Log out</a></li>
                             </ul>
                         </div>
                     </div>

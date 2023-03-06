@@ -14,8 +14,9 @@ const Login = () => {
     }
     const navegate = useNavigate()
     const token = localStorage.getItem("token");
-    const [value, setValue] = useState(initial);
+    const [value, setValue] = useState({});
     const [user, setUser] = useState()
+    const { email, password } = value
 
 
     const handleInput = (event) => {
@@ -26,19 +27,29 @@ const Login = () => {
 
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
 
         event.preventDefault();
         console.log(value);
-        axios.post("http://localhost:5000/login", { email: value.email, password: value.password })
-            .then(res => {
-                localStorage.setItem("token", res.data.accessToken);
-                localStorage.setItem("user", JSON.stringify(res.data.user))
-                if (token) {
-                    navegate("/sidebar")
-                }
-            });
+
+        if (!email || !password) {
+            alert("Email & Password is require")
+        } else
+            event.preventDefault();
+        console.log(user)
+        let res = await axios.post("http://localhost:5000/login", {email, password})
+        localStorage.setItem("token", res.data.token);
+        console.log(res.data);
+        // alert(res.data.Message);
+      navegate('/sidebar')
+
     }
+
+    useEffect(() => {
+        if (token) {
+            navegate("/sidebar")
+        }
+    }, [])
 
 
     return (
@@ -62,7 +73,7 @@ const Login = () => {
                 </div>
             </div>
         </>
-)
+    )
 }
 
 export default Login;

@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt');
 var cors = require('cors');
 const app = express();
-const secretkey = 'secretkey';
+const secretkey = 'secretkey'
 app.use(bodyParser.json());
 
 
@@ -53,12 +53,9 @@ app.post("/login", (req, res) => {
     });
 
     const user = {
-
-        // email: "admin@gmail.com",
-        // password: "admin12345"
+        email: "",
+        password: ""
     }
-
-
     if (!user) {
         return res.status(401).json({ message: 'Invalid username or password' });
     }
@@ -68,16 +65,16 @@ app.post("/login", (req, res) => {
 
 })
 
-app.get("/login", (req, res) => {
-    console.log("req", req.body);
-    connection.query(`SELECT * FROM signup WHERE email= ${req.body.email} AND password = ${req.body.password}`, (err, result) => {
-        if (err) {
-            console.log(err);
-        } else {
-            res.send(result);
-        }
-    });
-});
+  app.get("/login", (req, res) => {
+      console.log("req", req.body);
+      connection.query(`SELECT * FROM signup WHERE email= ${req.body.email} AND password = ${req.body.password}`, (err, result) => {
+          if (err) {
+              console.log(err);
+          } else {
+              res.send(result);
+          }
+      });
+  });
 
 app.post("/signup", (req, res) => {
 
@@ -100,7 +97,7 @@ app.post("/signup", (req, res) => {
 
     var sql = "INSERT INTO `signup`(`id`,`first_name`, `last_name`, `email`, `mobile`, `gender`, `date_of_birth`, `user_type`, `address`,`status`,  `password`, `confirm_password`) VALUES ('" + id + "','" + first_name + "' , '" + last_name + "' , '" + email + "' ,'" + mobile + "' ,'" + gender + "' , '" + date_of_birth + "' , '" + user_type + "' ,'" + address + "' , '" + status + "' , '" + password + "' ,  '" + confirm_password + "')"
 
-  
+
     connection.query(sql, (err, result) => {
         if (err) {
             console.log(err);
@@ -124,23 +121,6 @@ app.get("/signup", (req, res) => {
     });
 });
 
-app.put("/signup/:id", (req, res) => {
-    console.log("req", req.body);
-    const { id } = req.params;
-    const { first_name, last_name, email, mobile, gender, date_of_birth, user_type, address, status,  password, confirm_password } = req.body;
-
-
-    const sql = "UPDATE signup SET  first_name=?, last_name=?, email=?,mobile=?,gender=?,date_of_birth=?,user_type=?,address=?,status=?,password=?,confirm_password=? WHERE id=?"
-
-    connection.query(sql, [first_name, last_name, email, mobile, gender, date_of_birth, user_type, address, status,  password, confirm_password, id], (err, result) => {
-        if (err) {
-            console.log(err);
-        } else {
-            res.send(result)
-        }
-    })
-});
-
 app.get("/signup/:id", (req, res) => {
     const { id } = req.params;
 
@@ -153,6 +133,25 @@ app.get("/signup/:id", (req, res) => {
         }
     });
 });
+
+app.put("/signup/:id", (req, res) => {
+    console.log("req", req.body);
+    const { id } = req.params;
+    const { first_name, last_name, email, mobile, gender, date_of_birth, user_type, address, status, password, confirm_password } = req.body;
+
+
+    const sql = "UPDATE signup SET  first_name=?, last_name=?, email=?,mobile=?,gender=?,date_of_birth=?,user_type=?,address=?,status=?,password=?,confirm_password=? WHERE id=?"
+
+    connection.query(sql, [first_name, last_name, email, mobile, gender, date_of_birth, user_type, address, status, password, confirm_password, id], (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send(result)
+        }
+    })
+});
+
+
 
 app.delete("/signup", (req, res) => {
     console.log("req", req.body);

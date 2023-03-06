@@ -16,7 +16,6 @@ const Empdashboard = () => {
   const [formvalue, setValue] = useState()
   const navegate = useNavigate()
   const params = useParams();
-
   const [userList, setUserList] = useState()
   const [data, setData] = useState();
 
@@ -39,7 +38,7 @@ const Empdashboard = () => {
   });
 
   const deleteData = async (id) => {
-    alert("Are you want to delete")
+    // alert("Are you want to delete")
     await fetch("http://localhost:5000/signup", {
       method: "delete",
       body: JSON.stringify({ 'id': id }),
@@ -97,9 +96,9 @@ const Empdashboard = () => {
                 <tbody>
                   {
                     data?.map((data, index) => (
-                      <tr key={index }>
+                      <tr key={index}>
                         <td><b>{data.id}</b></td>
-                        <td> <Link to={"/Profile/" +data.id}><Button tittle="View Profile" /></Link></td>
+                        <td> <Link to={"/Profile/" + data.id}><Button tittle="View Profile" /></Link></td>
                         {/* <td>{data.status}</td> */}
                         <td><b>{data.first_name}&nbsp;{data.last_name}</b></td>
                         <td><b>{data.email}</b></td>
